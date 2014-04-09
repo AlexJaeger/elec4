@@ -1,0 +1,12 @@
+n=length(yk);
+y=yk-1;
+u=uk-0.5;
+y3=y(1:n-3);
+y2=y(2:n-2);
+y1=y(3:n-1);
+u3=u(1:n-3);
+u2=u(2:n-2);
+u1=u(3:n-1);
+phi=[y1,y2,y3,u1,u2,u3];
+yn=y(4:n);
+theta=inv(phi'*phi)*phi'*yn
