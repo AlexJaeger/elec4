@@ -1,0 +1,44 @@
+#! /opt/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7-7-g9b38de5)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x1fb54d0 .scope module, "dff_from_nand" "dff_from_nand" 2 1;
+ .timescale 0 0;
+L_0x1fe77e0 .functor NAND 1, v0x1fe7470_0, v0x1fb55c0_0, C4<1>, C4<1>;
+L_0x1fe78c0 .functor NAND 1, L_0x1fe77e0, v0x1fb55c0_0, C4<1>, C4<1>;
+L_0x1fe79f0 .functor NAND 1, L_0x1fe7a50, L_0x1fe77e0, C4<1>, C4<1>;
+L_0x1fe7a50 .functor NAND 1, L_0x1fe79f0, L_0x1fe78c0, C4<1>, C4<1>;
+v0x1fb55c0_0 .var "CLK", 0 0;
+v0x1fe7470_0 .var "D", 0 0;
+v0x1fe7510_0 .net "Q", 0 0, L_0x1fe79f0; 1 drivers
+v0x1fe75b0_0 .net "Q_BAR", 0 0, L_0x1fe7a50; 1 drivers
+v0x1fe7660_0 .net "X", 0 0, L_0x1fe77e0; 1 drivers
+v0x1fe7700_0 .net "Y", 0 0, L_0x1fe78c0; 1 drivers
+    .scope S_0x1fb54d0;
+T_0 ;
+    %vpi_call 2 10 "$monitor", "CLK = %b D = %b Q = %b Q_BAR = %b", v0x1fb55c0_0, v0x1fe7470_0, v0x1fe7510_0, v0x1fe75b0_0;
+    %set/v v0x1fb55c0_0, 0, 1;
+    %set/v v0x1fe7470_0, 0, 1;
+    %delay 3, 0;
+    %set/v v0x1fe7470_0, 1, 1;
+    %delay 3, 0;
+    %set/v v0x1fe7470_0, 0, 1;
+    %delay 3, 0;
+    %vpi_call 2 15 "$finish";
+    %end;
+    .thread T_0;
+    .scope S_0x1fb54d0;
+T_1 ;
+    %delay 2, 0;
+    %load/v 8, v0x1fb55c0_0, 1;
+    %inv 8, 1;
+    %set/v v0x1fb55c0_0, 8, 1;
+    %jmp T_1;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "dff.v";

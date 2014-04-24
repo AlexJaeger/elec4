@@ -1,0 +1,33 @@
+#! /opt/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7-7-g9b38de5)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x2714460 .scope module, "forever_example" "forever_example" 2 1;
+ .timescale 0 0;
+v0x2714550_0 .var "clk", 0 0;
+    .scope S_0x2714460;
+T_0 ;
+    %delay 1, 0;
+    %set/v v0x2714550_0, 0, 1;
+T_0.0 ;
+    %delay 5, 0;
+    %load/v 8, v0x2714550_0, 1;
+    %inv 8, 1;
+    %set/v v0x2714550_0, 8, 1;
+    %jmp T_0.0;
+    %end;
+    .thread T_0;
+    .scope S_0x2714460;
+T_1 ;
+    %vpi_call 2 13 "$monitor", "Time = %d clk = %b", $time, v0x2714550_0;
+    %delay 100, 0;
+    %vpi_call 2 14 "$finish";
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "clk.v";
